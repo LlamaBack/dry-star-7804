@@ -16,15 +16,15 @@ RSpec.describe 'hospital show page' do
         visit hospital_path(hospital1)
         expect(page).to have_content(hospital1.name)
         expect(doctor2.name).to appear_before(doctor1.name)
-        # within("#{doctor2.id}") do
+        within("##{doctor2.id}") do
             expect(page).to have_content("Doctor #{doctor2.name}")
             expect(page).to have_content("has 3 patients")
-        # end
+        end
 
-        # within("#{doctor1.id}") do
+        within("##{doctor1.id}") do
             expect(page).to have_content("Doctor #{doctor1.name}")
             expect(page).to have_content("has 2 patients")
-        # end
+        end
     end
     
 end
