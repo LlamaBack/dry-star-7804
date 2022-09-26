@@ -1,0 +1,9 @@
+<h1><%= @hospital.name %></h1>
+<h2>Doctors</h2>
+<ol>
+    <% @doctors.each do |doctor| %>
+        <li>
+            <p>Doctor <%= doctor.name %> has <%= doctor.patients.count %> patients</p></div>
+        </li>
+    <% end %>
+</ol>
