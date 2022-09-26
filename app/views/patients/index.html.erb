@@ -1,0 +1,6 @@
+<h1>Patients Older than 18</h1>
+<ol>
+    <% @adult_patients.each do |patient| %>
+        <li><%= patient.name %></li>
+    <% end %>
+</ol>

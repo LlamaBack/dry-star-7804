@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'doctor show page' do
+RSpec.describe 'doctors show page' do
     let!(:hospital1) {Hospital.create!(name: "Grey Sloan Memorial Hospital")}
     let!(:hospital2) {Hospital.create!(name: "Seaside Health & Wellness Center")}
 
@@ -28,10 +28,16 @@ RSpec.describe 'doctor show page' do
     end
 
     it 'adds a button next to each patient to remove that particular patient' do
+        doctor2.patients << patient1
+
         visit doctor_path(doctor1)
         expect(page).to have_content(patient1.name)
         click_on "Remove #{patient1.name}"
         expect(current_path).to eq("/doctors/#{doctor1.id}")
         expect(page).to_not have_content(patient1.name)
+
+        #checks if patient is still under other doctors
+        visit doctor_path(doctor2)
+        expect(page).to have_content(patient1.name)
     end
 end
