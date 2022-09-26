@@ -2,9 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'hospital show page' do
     let!(:hospital1) {Hospital.create!(name: "Grey Sloan Memorial Hospital")}
+    let!(:hospital2) {Hospital.create!(name: "Seaside Health & Wellness Center")}
 
     let!(:doctor1) {hospital1.doctors.create!(name: "Meredith Grey", specialty: "General Surgery", university: "Harvard University")}
     let!(:doctor2) {hospital1.doctors.create!(name: "Alex Karev", specialty: "Pediatric Surgery", university: "Johns Hopkins University")}
+    let!(:doctor3) {hospital2.doctors.create!(name: "klex aarev", specialty: "Pediatric Surgery", university: "Johns Hopkins University")}
 
     let!(:patient1) {doctor1.patients.create!(name: "Katie Bryce", age: 24)}
     let!(:patient2) {doctor1.patients.create!(name: "Denny Duquette", age: 39)}
@@ -25,6 +27,8 @@ RSpec.describe 'hospital show page' do
             expect(page).to have_content("Doctor #{doctor1.name}")
             expect(page).to have_content("has 2 patients")
         end
+
+        expect(page).to_not have_content(doctor3.name)
     end
     
 end
